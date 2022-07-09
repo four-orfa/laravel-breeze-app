@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComponentSampleController;
 use Inertia\Inertia;
 
 /*
@@ -28,4 +29,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::get('/component-1', [ComponentSampleController::class, 'showComponent1']);
+Route::get('/component-2', [ComponentSampleController::class, 'showComponent2']);
+
+
+require __DIR__ . '/auth.php';
