@@ -1,14 +1,41 @@
 <?php
 
-use App\Http\Controllers\User\AuthenticatedSessionController;
-use App\Http\Controllers\User\ConfirmablePasswordController;
-use App\Http\Controllers\User\EmailVerificationNotificationController;
-use App\Http\Controllers\User\EmailVerificationPromptController;
-use App\Http\Controllers\User\NewPasswordController;
-use App\Http\Controllers\User\PasswordResetLinkController;
-use App\Http\Controllers\User\RegisteredUserController;
-use App\Http\Controllers\User\VerifyEmailController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\ConfirmablePasswordController;
+use App\Http\Controllers\Admin\EmailVerificationNotificationController;
+use App\Http\Controllers\Admin\EmailVerificationPromptController;
+use App\Http\Controllers\Admin\NewPasswordController;
+use App\Http\Controllers\Admin\PasswordResetLinkController;
+use App\Http\Controllers\Admin\RegisteredUserController;
+use App\Http\Controllers\Admin\VerifyEmailController;
+use Inertia\Inertia;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth:admin', 'verified'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -34,7 +61,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.update');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
 
