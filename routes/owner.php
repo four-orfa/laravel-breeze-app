@@ -2,14 +2,14 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Owner\AuthenticatedSessionController;
-use App\Http\Controllers\Owner\ConfirmablePasswordController;
-use App\Http\Controllers\Owner\EmailVerificationNotificationController;
-use App\Http\Controllers\Owner\EmailVerificationPromptController;
-use App\Http\Controllers\Owner\NewPasswordController;
-use App\Http\Controllers\Owner\PasswordResetLinkController;
-use App\Http\Controllers\Owner\RegisteredUserController;
-use App\Http\Controllers\Owner\VerifyEmailController;
+use App\Http\Controllers\Owner\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Owner\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Owner\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Owner\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Owner\Auth\NewPasswordController;
+use App\Http\Controllers\Owner\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Owner\Auth\RegisteredUserController;
+use App\Http\Controllers\Owner\Auth\VerifyEmailController;
 use Inertia\Inertia;
 
 
@@ -24,8 +24,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
+Route::get('/owner', function () {
+    dd('test');
+    return Inertia::render('Owner/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -33,7 +34,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::get('/owner/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth:owners', 'verified'])->name('dashboard');
 

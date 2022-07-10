@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Login', [
+        return Inertia::render('User/Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);
@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard('users')->logout();
 
         $request->session()->invalidate();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -18,7 +18,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show()
     {
-        return Inertia::render('Auth/ConfirmPassword');
+        return Inertia::render('User/Auth/ConfirmPassword');
     }
 
     /**
@@ -29,7 +29,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Auth::guard('web')->validate([
+        if (!Auth::guard('user')->validate([
             'email' => $request->user()->email,
             'password' => $request->password,
         ])) {
