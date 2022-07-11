@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use Inertia\Inertia;
-
+use PHPUnit\Framework\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/admin', function () {
+Route::get('/', function () {
     return Inertia::render('Admin/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -33,8 +33,8 @@ Route::get('/admin', function () {
     ]);
 });
 
-Route::get('/admin/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Admin/Dashboard');
 })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {

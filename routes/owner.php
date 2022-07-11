@@ -24,8 +24,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/owner', function () {
-    dd('test');
+Route::get('/', function () {
     return Inertia::render('Owner/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -34,8 +33,8 @@ Route::get('/owner', function () {
     ]);
 });
 
-Route::get('/owner/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Owner/Dashboard');
 })->middleware(['auth:owners', 'verified'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {

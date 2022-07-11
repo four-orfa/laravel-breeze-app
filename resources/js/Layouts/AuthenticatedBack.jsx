@@ -5,15 +5,10 @@ import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/inertia-react'
 
-export default function Authenticated({
-  auth,
-  header,
-  logoutPath = 'logout',
-  children,
-}) {
+export default function Authenticated({ auth, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false)
-  console.log(logoutPath)
+
   return (
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white border-b border-gray-100">
@@ -27,7 +22,10 @@ export default function Authenticated({
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <NavLink href={logoutPath} active="">
+                <NavLink
+                  href={route('dashboard')}
+                  active={route().current('dashboard')}
+                >
                   Dashboard
                 </NavLink>
               </div>
@@ -61,7 +59,11 @@ export default function Authenticated({
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <Dropdown.Link href={logoutPath} method="post" as="button">
+                    <Dropdown.Link
+                      href={route('logout')}
+                      method="post"
+                      as="button"
+                    >
                       Log Out
                     </Dropdown.Link>
                   </Dropdown.Content>
@@ -114,7 +116,10 @@ export default function Authenticated({
           }
         >
           <div className="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink href={logoutPath} active="">
+            <ResponsiveNavLink
+              href={route('dashboard')}
+              active={route().current('dashboard')}
+            >
               Dashboard
             </ResponsiveNavLink>
           </div>
@@ -130,7 +135,11 @@ export default function Authenticated({
             </div>
 
             <div className="mt-3 space-y-1">
-              <ResponsiveNavLink method="post" href={logoutPath} as="button">
+              <ResponsiveNavLink
+                method="post"
+                href={route('logout')}
+                as="button"
+              >
                 Log Out
               </ResponsiveNavLink>
             </div>
