@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\OwnersController;
 use Inertia\Inertia;
-use PHPUnit\Framework\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::resource('owners', OwnersController::class)->middleware('auth:admin');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Admin/Dashboard');

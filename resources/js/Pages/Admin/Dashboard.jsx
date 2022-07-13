@@ -1,10 +1,10 @@
 import React from 'react'
-import Authenticated from '@/Layouts/Authenticated'
+import AuthenticatedAdmin from './Components/AuthenticatedAdmin'
 import { Head } from '@inertiajs/inertia-react'
 
 export default function Dashboard(props) {
   return (
-    <Authenticated
+    <AuthenticatedAdmin
       auth={props.auth}
       errors={props.errors}
       logoutPath="logout"
@@ -25,6 +25,6 @@ export default function Dashboard(props) {
           </div>
         </div>
       </div>
-    </Authenticated>
+    </AuthenticatedAdmin>
   )
 }

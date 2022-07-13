@@ -3,7 +3,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-import { Link } from '@inertiajs/inertia-react'
+import { Link, usePage } from '@inertiajs/inertia-react'
 
 export default function Authenticated({
   auth,
@@ -13,6 +13,8 @@ export default function Authenticated({
 }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false)
+  const { url, component } = usePage()
+
   return (
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white border-b border-gray-100">
@@ -26,8 +28,14 @@ export default function Authenticated({
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <NavLink href={logoutPath} active="">
+                <NavLink
+                  href="/admin/dashboard"
+                  active={url === '/admin/dashboard' ? true : false}
+                >
                   Dashboard
+                </NavLink>
+                <NavLink href={route('admin.owners.index')} active="">
+                  Owner Management
                 </NavLink>
               </div>
             </div>
