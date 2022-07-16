@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Owner;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OwnersController extends Controller
 {
@@ -20,7 +22,11 @@ class OwnersController extends Controller
     public function index()
     {
         //
-        dd('test');
+        $owners = Owner::select('id', 'name', 'email', 'created_at')->get();
+
+        return Inertia::render('Admin/OwnersManagement', [
+            'owners' => $owners,
+        ]);
     }
 
     /**

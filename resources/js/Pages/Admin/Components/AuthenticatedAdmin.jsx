@@ -34,7 +34,10 @@ export default function Authenticated({
                 >
                   Dashboard
                 </NavLink>
-                <NavLink href={route('admin.owners.index')} active="">
+                <NavLink
+                  href={route('admin.owners.index')}
+                  active={url === '/admin/owners' ? true : false}
+                >
                   Owner Management
                 </NavLink>
               </div>
