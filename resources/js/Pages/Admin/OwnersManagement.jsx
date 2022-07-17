@@ -14,6 +14,10 @@ export default function Dashboard(props) {
     return formattedDate
   }
 
+  const redirectToCreate = () => {
+    window.location.href = route('admin.owners.create')
+  }
+
   return (
     <AuthenticatedAdmin
       auth={props.auth}
@@ -25,7 +29,7 @@ export default function Dashboard(props) {
         </h2>
       }
     >
-      <Head title="Dashboard" />
+      <Head title="Management" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -39,6 +43,12 @@ export default function Dashboard(props) {
                     </h1>
                   </div>
                   <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+                    <button
+                      className="flex mr-auto text-white bg-green-500 border-0 py-2 px-6 mb-10 focus:outline-none hover:bg-green-600 rounded"
+                      onClick={redirectToCreate}
+                    >
+                      register
+                    </button>
                     <table className="table-auto w-full text-left whitespace-no-wrap">
                       <thead>
                         <tr>
@@ -57,6 +67,7 @@ export default function Dashboard(props) {
                           <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                         </tr>
                       </thead>
+
                       <tbody>
                         {props.owners.map((owner) => (
                           <tr key={owner.id}>
@@ -93,9 +104,6 @@ export default function Dashboard(props) {
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
                       </svg>
                     </a>
-                    <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-                      Button
-                    </button>
                   </div>
                 </div>
               </section>
