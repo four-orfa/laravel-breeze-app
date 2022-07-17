@@ -8,12 +8,12 @@ export default function Dashboard(props) {
     const formattedDate =
       dateTime.getFullYear() +
       ' / ' +
-      dateTime.getMonth() +
+      (dateTime.getMonth() + 1) +
       ' / ' +
-      dateTime.getDay()
+      dateTime.getDate()
+    console.log(dateTime.getDay())
     return formattedDate
   }
-
   const redirectToCreate = () => {
     window.location.href = route('admin.owners.create')
   }
