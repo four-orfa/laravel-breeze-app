@@ -11,7 +11,6 @@ export default function Dashboard(props) {
       (dateTime.getMonth() + 1) +
       ' / ' +
       dateTime.getDate()
-    console.log(dateTime.getDay())
     return formattedDate
   }
   const redirectToCreate = () => {
