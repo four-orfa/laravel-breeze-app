@@ -38,7 +38,7 @@ export default function Authenticated({
                   href={route('admin.owners.index')}
                   active={url === '/admin/owners' ? true : false}
                 >
-                  Owner Management
+                  Owners Management
                 </NavLink>
               </div>
             </div>

@@ -84,7 +84,9 @@ class OwnersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+
+        return Inertia::render('Admin/OwnerEdit', ['owner' => $owner]);
     }
 
     /**

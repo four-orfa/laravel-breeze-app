@@ -2,7 +2,7 @@ import React from 'react'
 import AuthenticatedAdmin from './Components/AuthenticatedAdmin'
 import { Head } from '@inertiajs/inertia-react'
 
-export default function Dashboard(props) {
+export default function CreateOwner(props) {
   const dateFormat = (date) => {
     const dateTime = new Date(date)
     const formattedDate =
@@ -17,6 +17,10 @@ export default function Dashboard(props) {
     window.location.href = route('admin.owners.create')
   }
 
+  const redirectToEdit = (id) => {
+    window.location.href = route('admin.owners.edit', id)
+  }
+
   return (
     <AuthenticatedAdmin
       auth={props.auth}
@@ -24,7 +28,7 @@ export default function Dashboard(props) {
       logoutPath="logout"
       header={
         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-          Dashboard
+          Management
         </h2>
       }
     >
@@ -46,7 +50,7 @@ export default function Dashboard(props) {
                       className="flex mr-auto text-white bg-green-500 border-0 py-2 px-6 mb-10 focus:outline-none hover:bg-green-600 rounded"
                       onClick={redirectToCreate}
                     >
-                      register
+                      Register
                     </button>
                     <table className="table-auto w-full text-left whitespace-no-wrap">
                       <thead>
@@ -77,11 +81,12 @@ export default function Dashboard(props) {
                               {dateFormat(owner.created_at)}
                             </td>
                             <td className="px-4 py-3 text-lg text-gray-900">
-                              <input
-                                name="plan"
-                                type="radio"
-                                value={owner.id}
-                              />
+                              <button
+                                className="flex mr-auto text-white bg-lime-500 border-0 py-1 px-4 focus:outline-none hover:bg-lime-600 rounded"
+                                onClick={() => redirectToEdit(owner.id)}
+                              >
+                                Edit
+                              </button>
                             </td>
                           </tr>
                         ))}
