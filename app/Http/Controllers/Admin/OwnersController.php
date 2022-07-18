@@ -118,5 +118,6 @@ class OwnersController extends Controller
     public function destroy($id)
     {
         //
+        dd('delete');
     }
 }
