@@ -23,8 +23,11 @@ class OwnersController extends Controller
      */
     public function index()
     {
-        //
         $owners = Owner::select('id', 'name', 'email', 'created_at')->get();
+
+        // check soft delete.
+        // $deletedOwner = Owner::onlyTrashed()->get();
+        // dd($deletedOwner);
 
         return Inertia::render('Admin/OwnersManagement', [
             'owners' => $owners,
@@ -117,7 +120,9 @@ class OwnersController extends Controller
      */
     public function destroy($id)
     {
-        //
-        dd('delete');
+        // Soft delete.
+        Owner::findOrFail($id)->delete();
+
+        return redirect()->route('admin.owners.index');
     }
 }
