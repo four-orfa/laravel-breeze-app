@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthenticatedAdmin from './Components/AuthenticatedAdmin'
 import { Head, Link } from '@inertiajs/inertia-react'
+import { Inertia } from '@inertiajs/inertia'
 
 export default function CreateOwner(props) {
   const dateFormat = (date) => {
@@ -34,19 +35,11 @@ export default function CreateOwner(props) {
                 <div className="container px-5 py-6 mx-auto">
                   <div className="flex flex-col text-center w-full mb-">
                     <h1 className="sm:text-4xl text-3xl font-medium title-font mb-8 text-gray-900">
-                      OWNERS
+                      EXPIRED OWNERS
                     </h1>
                   </div>
                   <div className="lg:w-2/3 w-full mx-auto overflow-auto">
-                    <div className="flex flex-col w-full">
-                      <Link
-                        className="flex mr-auto text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-green-600 rounded lg:w-2/9"
-                        href={route('admin.owners.create')}
-                      >
-                        Register
-                      </Link>
-                    </div>
-                    <table className="table-auto w-full text-left whitespace-no-wrap mt-12">
+                    <table className="table-auto w-full text-left whitespace-no-wrap">
                       <thead>
                         <tr>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
@@ -74,26 +67,45 @@ export default function CreateOwner(props) {
                             <td className="px-4 py-3">
                               {dateFormat(owner.created_at)}
                             </td>
-                            <td className="px-4 py-3">
-                              <Link
-                                className="flex mr-auto text-white bg-lime-500 border-0 py-1 px-4 focus:outline-none hover:bg-lime-600 rounded"
-                                href={route('admin.owners.edit', owner.id)}
+                            <td className="px-4 py-3 text-lg text-gray-900">
+                              <button
+                                className="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg"
+                                onClick={() => {
+                                  Inertia.delete(
+                                    route(
+                                      'admin.expired-owners.destroy',
+                                      owner.id
+                                    )
+                                  )
+                                }}
                               >
-                                Edit
-                              </Link>
+                                Delete
+                              </button>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+                  <div className="flex pl-4 mt-10 lg:w-2/3 w-full mx-auto">
                     <Link
                       className="text-red-500 inline-flex items-center md:mb-2 lg:mb-0"
-                      href={route('admin.expired-owners.index')}
+                      href={route('admin.owners.index')}
                     >
-                      Expired owners
+                      back
                     </Link>
+                  </div>
+                  <div className="flex pl-4 mt-10 lg:w-2/3 w-full mx-auto">
+                    <div>
+                      <a
+                        className="text-red-500 inline-flex items-center md:mb-2 lg:mb-0"
+                        onClick={() =>
+                          (window.location.href = route('admin.owners.index'))
+                        }
+                      >
+                        bad sample
+                      </a>
+                    </div>
                   </div>
                 </div>
               </section>

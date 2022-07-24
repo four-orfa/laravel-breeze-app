@@ -5,12 +5,7 @@ import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link, usePage } from '@inertiajs/inertia-react'
 
-export default function Authenticated({
-  auth,
-  header,
-  logoutPath = 'logout',
-  children,
-}) {
+export default function Authenticated({ auth, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false)
   const { url, component } = usePage()
@@ -36,7 +31,12 @@ export default function Authenticated({
                 </NavLink>
                 <NavLink
                   href={route('admin.owners.index')}
-                  active={url === '/admin/owners' ? true : false}
+                  active={
+                    url.startsWith('/admin/owners') ||
+                    url.startsWith('/admin/expired-owners')
+                      ? true
+                      : false
+                  }
                 >
                   Owners Management
                 </NavLink>
@@ -71,7 +71,11 @@ export default function Authenticated({
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <Dropdown.Link href={logoutPath} method="post" as="button">
+                    <Dropdown.Link
+                      href={route('admin.logout')}
+                      method="post"
+                      as="button"
+                    >
                       Log Out
                     </Dropdown.Link>
                   </Dropdown.Content>
@@ -124,7 +128,7 @@ export default function Authenticated({
           }
         >
           <div className="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink href={logoutPath} active="">
+            <ResponsiveNavLink href={route('admin.logout')} active="">
               Dashboard
             </ResponsiveNavLink>
           </div>
@@ -140,7 +144,11 @@ export default function Authenticated({
             </div>
 
             <div className="mt-3 space-y-1">
-              <ResponsiveNavLink method="post" href={logoutPath} as="button">
+              <ResponsiveNavLink
+                method="post"
+                href={route('admin.logout')}
+                as="button"
+              >
                 Log Out
               </ResponsiveNavLink>
             </div>

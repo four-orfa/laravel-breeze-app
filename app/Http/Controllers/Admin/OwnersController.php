@@ -125,4 +125,30 @@ class OwnersController extends Controller
 
         return redirect()->route('admin.owners.index');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function expiredOwnerIndex()
+    {
+        $owners = Owner::onlyTrashed()->get();
+        return Inertia::render('Admin/ExpiredOwnersManagement', [
+            'owners' => $owners,
+        ]);
+    }
+
+    /**
+     * Force delete from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function expiredOwnerDestroy($id)
+    {
+        Owner::onlyTrashed()->findOrFail($id)->forceDelete();
+
+        return redirect()->route('admin.expired-owners.index');
+    }
 }

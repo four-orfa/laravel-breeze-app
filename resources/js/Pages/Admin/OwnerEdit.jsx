@@ -29,15 +29,15 @@ export default function EditOwner(props) {
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
     )
   }
-
+  console.log(deleteFlag)
   const submit = (e) => {
     e.preventDefault()
     if (deleteFlag) {
       if (confirm('Are you sure ?')) {
-        destroy(route('admin.owners.update', data.id))
+        destroy(route('admin.owners.destroy', data.id))
       }
     } else {
-      put(route('admin.owners.delete', data.id))
+      put(route('admin.owners.update', data.id))
     }
   }
 
