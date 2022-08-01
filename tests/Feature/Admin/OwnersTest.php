@@ -5,11 +5,10 @@ namespace Tests\Feature\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Admin;
 use App\Models\Owner;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class Owners extends TestCase
+class OwnersTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -115,11 +114,12 @@ class Owners extends TestCase
             'email' => 'new-email-name@example.com',
         ]);
         $newOwner = Owner::where('email', 'new-email-name@example.com')->first();
-        $this->assertTrue(Hash::check('newPassword', wOwner->password));
+        $this->assertTrue(Hash::check('newPassword', $newOwner->password));
     }
 
     /**
      * Delete OwnerUser Test.
+     * (Soft Delete)
      *
      * @return void
      */
@@ -127,10 +127,27 @@ class Owners extends TestCase
     {
         $this->login();
 
-        $this->delete('admin/owners' . $this->owner->id);
+        $this->delete('admin/owners/' . $this->owner->id);
+        $this->assertSoftDeleted('owners', [
+            'id' => $this->owner->id
+        ]);
+    }
+
+    /**
+     * Delete OwnerUser Test.
+     * (Soft Delete)
+     *
+     * @return void
+     */
+    public function test_force_delete_owners()
+    {
+        $this->login();
+
+        $this->delete('admin/owners/' . $this->owner->id);
+        $this->delete('admin/expired-owners/destroy/' . $this->owner->id);
 
         $this->assertDatabaseMissing('owners', [
-            'email' => 'owner@example.com',
+            'id' => $this->owner->id
         ]);
     }
 }
