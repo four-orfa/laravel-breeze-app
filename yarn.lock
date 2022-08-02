@@ -1429,10 +1429,12 @@ json5@^2.2.1:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-laravel-vite-plugin@^0.2.1:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/laravel-vite-plugin/-/laravel-vite-plugin-0.2.4.tgz#66f4eeca83b236ca5dada7784bc56ff19730d84f"
-  integrity sha512-tb5hZ3aZ/bjvQUAkAYSrq7b64ZyjTY/joegVzrMoV6xGZUGTHyglcNkaa2G7Wtu1j0hLIO64ETeryxWbScSfYA==
+laravel-vite-plugin@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/laravel-vite-plugin/-/laravel-vite-plugin-0.5.2.tgz#5b16ef189d8eab09ebd468f26d1b618b29f89c2b"
+  integrity sha512-6ufssMvfF3IK/t1hRiYApTB6MHnpIAEZxte+V89aOt5T4CP8OVCPY5qvFBGwddW+yoVEOH5lnojSAD5YzM5T1w==
+  dependencies:
+    vite-plugin-full-reload "^1.0.1"
 
 levn@^0.4.1:
   version "0.4.1"
@@ -2051,6 +2053,14 @@ v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
+
+vite-plugin-full-reload@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-full-reload/-/vite-plugin-full-reload-1.0.3.tgz#67997c0243b783c3b7e97159543acdf5c0224bc0"
+  integrity sha512-owIZz/tGXFyUzIDzbu4KBpxrpd08BO+tuWqZABCug5C2laNTwOS4mcDMsMKnXT7B7WR8oRd+BI6a2kVDtsan3w==
+  dependencies:
+    picocolors "^1.0.0"
+    picomatch "^2.3.1"
 
 vite@^2.9.11:
   version "2.9.14"
