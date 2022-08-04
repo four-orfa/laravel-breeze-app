@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthenticatedAdmin from './Components/AuthenticatedAdmin'
 import { Head, Link } from '@inertiajs/inertia-react'
+import Pagination from './Components/Pagination'
 
 export default function CreateOwner(props) {
   const dateFormat = (date) => {
@@ -37,7 +38,7 @@ export default function CreateOwner(props) {
                       OWNERS
                     </h1>
                   </div>
-                  <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+                  <div className="lg:w-3/4 w-full mx-auto overflow-auto">
                     <div className="flex flex-col w-full">
                       <Link
                         className="flex mr-auto text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-green-600 rounded lg:w-2/9"
@@ -66,7 +67,7 @@ export default function CreateOwner(props) {
                       </thead>
 
                       <tbody>
-                        {props.owners.map((owner) => (
+                        {props.owners.data.map((owner) => (
                           <tr key={owner.id}>
                             <td className="px-4 py-3">{owner.id}</td>
                             <td className="px-4 py-3">{owner.name}</td>
@@ -86,6 +87,9 @@ export default function CreateOwner(props) {
                         ))}
                       </tbody>
                     </table>
+                    <div className="mt-8 flex justify-center">
+                      <Pagination property={props} />
+                    </div>
                   </div>
                   <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
                     <Link

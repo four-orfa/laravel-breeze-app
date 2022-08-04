@@ -29,7 +29,6 @@ export default function EditOwner(props) {
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
     )
   }
-  console.log(deleteFlag)
   const submit = (e) => {
     e.preventDefault()
     if (deleteFlag) {
