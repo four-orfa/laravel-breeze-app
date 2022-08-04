@@ -38,7 +38,7 @@ export default function CreateOwner(props) {
                       EXPIRED OWNERS
                     </h1>
                   </div>
-                  <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+                  <div className="w-full mx-auto overflow-auto">
                     <table className="table-auto w-full text-left whitespace-no-wrap">
                       <thead>
                         <tr>
@@ -51,7 +51,7 @@ export default function CreateOwner(props) {
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             e-mail
                           </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                          <th className="w-10 px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             created_at
                           </th>
                           <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>

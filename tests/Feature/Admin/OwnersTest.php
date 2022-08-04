@@ -119,7 +119,7 @@ class OwnersTest extends TestCase
 
     /**
      * Delete OwnerUser Test.
-     * (Soft Delete)
+     * (Force Delete)
      *
      * @return void
      */

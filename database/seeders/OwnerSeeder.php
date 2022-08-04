@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Owner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +17,6 @@ class OwnerSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('owners')->insert([
-            'name' => 'owner',
-            'email' => 'owner@example.com',
-            'password' => Hash::make('password123'),
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
+        Owner::factory(30)->create();
     }
 }
