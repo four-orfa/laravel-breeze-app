@@ -87,8 +87,8 @@ class OwnersTest extends TestCase
 
         $this->post('admin/owners', $owner);
 
+        // Search Unique key.
         $this->assertDatabaseHas('owners', [
-            'name' => 'OwnerUser',
             'email' => 'owner@example.com',
         ]);
     }
@@ -102,6 +102,11 @@ class OwnersTest extends TestCase
     {
         $this->login();
 
+        // Find ownerUser by id.
+        $this->get('admin/owners/' . $this->owner->id . 'edit')
+            ->assertSee($this->owner->id);
+
+        // Update ownerUser.
         $this->put('admin/owners/' . $this->owner->id, [
             'name' => 'RenameUser',
             'email' => 'new-email-name@example.com',
@@ -109,6 +114,7 @@ class OwnersTest extends TestCase
             'password_confirmation' => 'newPassword',
         ]);
 
+        // Check Updated owner user in database.
         $this->assertDatabaseHas('owners', [
             'name' => 'RenameUser',
             'email' => 'new-email-name@example.com',

@@ -33,16 +33,27 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('owners', OwnersController::class)->middleware('auth:admin');
+Route::get('/dashboard', function () {
+    return Inertia::render('Admin/Dashboard');
+})->middleware(['auth:admin', 'verified'])->name('dashboard');
+
+// Route::resource('owners', OwnersController::class)->middleware('auth:admin');
+
+Route::prefix('owners')->middleware('auth:admin')->group(function () {
+    Route::get('/', [OwnersController::class, 'index'])->name('owners.index');
+    Route::post('/', [OwnersController::class, 'store'])->name('owners.store');
+    Route::put('/{owner}', [OwnersController::class, 'update'])->name('owners.update');
+    Route::delete('/{owner}', [OwnersController::class, 'destroy'])->name('owners.destroy');
+    Route::get('create', [OwnersController::class, 'create'])->name('owners.create');
+    Route::get('{owner}/edit', [OwnersController::class, 'edit'])->name('owners.edit');
+});
+
 
 Route::prefix('expired-owners')->middleware('auth:admin')->group(function () {
     Route::get('/', [OwnersController::class, 'expiredOwnerIndex'])->name('expired-owners.index');
     Route::delete('destroy/{owner}', [OwnersController::class, 'expiredOwnerDestroy'])->name('expired-owners.destroy');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
-})->middleware(['auth:admin', 'verified'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
