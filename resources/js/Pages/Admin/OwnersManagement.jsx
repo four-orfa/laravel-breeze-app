@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/inertia-react'
 import Pagination from './Components/Pagination'
 
 export default function CreateOwner(props) {
+  // console.log(props)
   const dateFormat = (date) => {
     const dateTime = new Date(date)
     const formattedDate =
@@ -88,7 +89,7 @@ export default function CreateOwner(props) {
                       </tbody>
                     </table>
                     <div className="mt-8 flex justify-center">
-                      <Pagination property={props} />
+                      <Pagination property={props.owners} />
                     </div>
                   </div>
                   <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">

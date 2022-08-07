@@ -1,8 +1,9 @@
 import { Link } from '@inertiajs/inertia-react'
 
 const Pagination = (props) => {
-  const currentPage = props.property.owners.current_page
-  const lastPage = props.property.owners.last_page
+  console.log(props)
+  const currentPage = props.property.current_page
+  const lastPage = props.property.last_page
 
   let pages = []
   if (lastPage > 4) {
@@ -44,7 +45,7 @@ const Pagination = (props) => {
         <Link
           key={index}
           href={`./?page=${page.page}`}
-          className={`h-12 border-2 border-r-0 border-indigo-600 text-center leading-10
+          className={`h-12 border-2 border-r-0 border-indigo-600 text-center leading-10 hover:bg-indigo-600 hover:text-white
               w-12 ${currentPage === page.page && 'bg-indigo-600 text-white'}`}
         >
           {page.page}
