@@ -104,9 +104,17 @@ class OwnersController extends Controller
     {
         $owner = Owner::findOrFail($id);
 
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
         $owner->name = $request->name;
         $owner->email = $request->email;
-        $owner->password = Hash::make($request->password);
+
+        if ($request->password) {
+            $request->validate(['password' => ['required', 'confirmed', Rules\Password::defaults()]]);
+            $owner->password = Hash::make($request->password);
+        }
 
         $owner->save();
 

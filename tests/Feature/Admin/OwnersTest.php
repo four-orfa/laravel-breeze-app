@@ -26,7 +26,7 @@ class OwnersTest extends TestCase
     }
 
     /**
-     * Make test data.
+     * Admin User login.
      *
      * @return void
      */
@@ -94,7 +94,7 @@ class OwnersTest extends TestCase
     }
 
     /**
-     * Edit owner test.
+     * Edit owner test with password.
      *
      * @return void
      */
@@ -124,6 +124,32 @@ class OwnersTest extends TestCase
     }
 
     /**
+     * Edit owner test no password.
+     *
+     * @return void
+     */
+    public function test_edit_no_password_owners()
+    {
+        $this->login();
+
+        // Find ownerUser by id.
+        $this->get('admin/owners/' . $this->owner->id . 'edit')
+            ->assertSee($this->owner->id);
+
+        // Update ownerUser.
+        $this->put('admin/owners/' . $this->owner->id, [
+            'name' => 'RenameUser',
+            'email' => 'new-email-name@example.com',
+        ]);
+
+        // Check Updated owner user in database.
+        $this->assertDatabaseHas('owners', [
+            'name' => 'RenameUser',
+            'email' => 'new-email-name@example.com',
+        ]);
+    }
+
+    /**
      * Delete OwnerUser Test.
      * (Force Delete)
      *
@@ -149,7 +175,9 @@ class OwnersTest extends TestCase
     {
         $this->login();
 
+        // Soft delete is require before force delete.
         $this->delete('admin/owners/' . $this->owner->id);
+        // Force delete.
         $this->delete('admin/expired-owners/destroy/' . $this->owner->id);
 
         $this->assertDatabaseMissing('owners', [

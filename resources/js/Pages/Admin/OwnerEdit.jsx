@@ -5,13 +5,15 @@ import Input from '@/Components/Input'
 import ValidationErrors from '@/Components/ValidationErrors'
 
 export default function EditOwner(props) {
-  const { data, setData, put, processing, errors, reset } = useForm({
+  const { data, setData, put, errors, reset } = useForm({
     id: props.owner.id,
     name: props.owner.name,
     email: props.owner.email,
     password: '',
     password_confirmation: '',
   })
+
+  const [requiredFlag, setRequiredFlag] = useState(false)
 
   const onHandleChange = (e) => {
     setData(
@@ -29,6 +31,14 @@ export default function EditOwner(props) {
       reset('password', 'password_confirmation')
     }
   }, [])
+
+  useEffect(() => {
+    if (data.password || data.password_confirmation) {
+      setRequiredFlag(true)
+    } else {
+      setRequiredFlag(false)
+    }
+  }, [data.password, data.password_confirmation])
 
   return (
     <AuthenticatedAdmin
@@ -120,7 +130,7 @@ export default function EditOwner(props) {
                               value={data.password}
                               className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                               handleChange={onHandleChange}
-                              required
+                              required={requiredFlag}
                             />
                           </div>
                         </div>
@@ -139,7 +149,7 @@ export default function EditOwner(props) {
                               value={data.password_confirmation}
                               className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                               handleChange={onHandleChange}
-                              required
+                              required={requiredFlag}
                             />
                           </div>
                         </div>
