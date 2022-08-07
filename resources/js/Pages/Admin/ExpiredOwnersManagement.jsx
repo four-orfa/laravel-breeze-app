@@ -15,6 +15,12 @@ export default function CreateOwner(props) {
     return formattedDate
   }
 
+  const forceDeleteEvent = (id) => {
+    if (confirm('Are you sure force delete?')) {
+      Inertia.delete(route('admin.expired-owners.destroy', id))
+    }
+  }
+
   return (
     <AuthenticatedAdmin
       auth={props.auth}
@@ -69,15 +75,8 @@ export default function CreateOwner(props) {
                             </td>
                             <td className="px-4 py-3 text-lg text-gray-900">
                               <button
-                                className="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg"
-                                onClick={() => {
-                                  Inertia.delete(
-                                    route(
-                                      'admin.expired-owners.destroy',
-                                      owner.id
-                                    )
-                                  )
-                                }}
+                                className="inline-flex items-center px-4 py-2 bg-red-400 hover:bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150"
+                                onClick={() => forceDeleteEvent(owner.id)}
                               >
                                 Delete
                               </button>

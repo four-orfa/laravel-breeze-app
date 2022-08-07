@@ -5,17 +5,7 @@ import Input from '@/Components/Input'
 import ValidationErrors from '@/Components/ValidationErrors'
 
 export default function EditOwner(props) {
-  const [deleteFlag, setDeleteFlag] = useState(false)
-
-  const {
-    data,
-    setData,
-    put,
-    delete: destroy,
-    processing,
-    errors,
-    reset,
-  } = useForm({
+  const { data, setData, put, processing, errors, reset } = useForm({
     id: props.owner.id,
     name: props.owner.name,
     email: props.owner.email,
@@ -31,13 +21,7 @@ export default function EditOwner(props) {
   }
   const submit = (e) => {
     e.preventDefault()
-    if (deleteFlag) {
-      if (confirm('Are you sure ?')) {
-        destroy(route('admin.owners.destroy', data.id))
-      }
-    } else {
-      put(route('admin.owners.update', data.id))
-    }
+    put(route('admin.owners.update', data.id))
   }
 
   useEffect(() => {
@@ -167,26 +151,9 @@ export default function EditOwner(props) {
                           >
                             Back
                           </button>
-                          <button
-                            className={`
-                            ${
-                              deleteFlag
-                                ? 'flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg'
-                                : 'flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'
-                            }
-                            ${processing && 'opacity-25'} `}
-                            disabled={processing}
-                          >
-                            {deleteFlag ? 'Delete' : 'Submit'}
+                          <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                            Submit
                           </button>
-                        </div>
-                        <div className="p-2 w-2/3 mx-auto mt-10">
-                          <a
-                            className="text-red-500"
-                            onClick={() => setDeleteFlag(!deleteFlag)}
-                          >
-                            Click if you want to delete.
-                          </a>
                         </div>
                       </div>
                     </form>

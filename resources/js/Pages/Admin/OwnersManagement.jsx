@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthenticatedAdmin from './Components/AuthenticatedAdmin'
-import { Head, Link } from '@inertiajs/inertia-react'
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, post } from '@inertiajs/inertia-react'
 import Pagination from './Components/Pagination'
 
 export default function CreateOwner(props) {
@@ -14,6 +15,12 @@ export default function CreateOwner(props) {
       ' / ' +
       dateTime.getDate()
     return formattedDate
+  }
+
+  const deleteEvent = (id) => {
+    if (confirm('Are you sure ?')) {
+      Inertia.delete(route('admin.owners.destroy', id))
+    }
   }
 
   return (
@@ -64,6 +71,7 @@ export default function CreateOwner(props) {
                             created_at
                           </th>
                           <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                          <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                         </tr>
                       </thead>
 
@@ -83,6 +91,14 @@ export default function CreateOwner(props) {
                               >
                                 Edit
                               </Link>
+                            </td>
+                            <td>
+                              <button
+                                className="inline-flex items-center px-4 py-2 bg-red-400 hover:bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150"
+                                onClick={() => deleteEvent(owner.id)}
+                              >
+                                Delete
+                              </button>
                             </td>
                           </tr>
                         ))}
