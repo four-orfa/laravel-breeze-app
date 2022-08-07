@@ -32,10 +32,8 @@ class OwnersTest extends TestCase
      */
     protected function login(): void
     {
-        $this->post('/admin/login', [
-            'email' => $this->admin->email,
-            'password' => 'password',
-        ]);
+        // Admin user login.
+        $this->actingAs($this->admin, 'admin');
     }
 
     /**
